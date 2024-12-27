@@ -31,6 +31,7 @@
     ansible_httpapi_port: 8080
     ansible_httpapi_use_ssl: false
     ansible_httpapi_validate_certs: false
+    ansible_command_timeout: 60
     ansible_user: Admin
     ansible_httpapi_pass: zabbix
 
@@ -50,8 +51,8 @@
     status_code: 200
   retries: 60
   delay: 5
-  until: check_login_result is defined and 'json' in check_login_result and 'result' in check_login_result.json
-  register: check_login_result
+  until: check_login_under64_result is defined and 'json' in check_login_under64_result and 'result' in check_login_under64_result.json
+  register: check_login_under64_result
   when: zabbix_version is version('6.4', '<')
 
 - name: check login to zabbix for Zabbix >= 6.4
